@@ -1,0 +1,17 @@
+# Live generated AQI data
+**/data/live/live_air_quality.csv
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
