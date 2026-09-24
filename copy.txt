@@ -1,0 +1,1 @@
+C:\Users\GAUTHAM SURESH\Desktop\HPC_PROJECT>scp -i "C:\Users\GAUTHAM SURESH\Desktop\HPC_PROJECT\air-quality-key.pem" -r ubuntu@65.2.121.61:/home/ubuntu/air-quality-api .

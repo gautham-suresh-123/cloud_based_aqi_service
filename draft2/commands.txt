@@ -1,0 +1,112 @@
+http://air-quality-hpc.s3-website.ap-south-1.amazonaws.com/dashboard/ => AWS LINK
+
+https://open-meteo.com/en/docs/air-quality-api(public api used)
+
+cd ~/air-quality-api
+source venv/bin/activate
+uvicorn api:app --host 0.0.0.0 --port 8000
+
+
+Terminal 2
+cd ~/air-quality-api
+source venv/bin/activate
+ls
+
+source venv/bin/activate
+python realtime_simulator.py
+
+
+sudo systemctl daemon-reload
+sudo systemctl enable air-quality-simulator
+sudo systemctl start air-quality-simulator
+
+link:
+http://air-quality-hpc.s3-website.ap-south-1.amazonaws.com/dashboard/index.html
+
+Backend:
+curl -s http://localhost:8000/api/hpc
+
+Cloud-Based Real-Time Air Quality Monitoring System
+
+1. Problem statement → Why real-time air-quality monitoring is required.
+
+2. Proposed architecture → Dataset → AWS → DynamoDB → EC2 → OpenMP → Dashboard.
+
+3. Cloud implementation → S3, DynamoDB and EC2.
+
+4. Real-time implementation → Explain the simulator and continuously changing readings.
+
+5. HPC implementation → Explain OpenMP and CPU parallel processing.
+
+6. Live backend demonstration → Run:
+7. API demonstration → Open /api/stats.
+
+8. Dashboard demonstration → Open the deployed S3 dashboard.
+
+9. Results → Show records processed, AQI statistics, OpenMP threads and execution time.
+
+10. Future enhancement → Sequential vs OpenMP benchmarking and eventually CUDA/GPU acceleration.
+
+Current limitations
+1. Simulation Data
+2. No real time update
+
+
+
+Project running commands/
+ssh -i "C:\Users\GAUTHAM SURESH\Desktop\HPC mini project\air-quality-key.pem" ubuntu@65.2.121.61
+
+cd ~/air-quality-api
+
+sudo systemctl status air-quality-api
+
+sudo systemctl status air-quality-simulator
+
+
+
+AWS LINK:
+http://air-quality-hpc.s3-website.ap-south-1.amazonaws.com/dashboard/index.html	
+
+EC2
+ubuntu@ip-172-31-1-151:~$ cd ~/air-quality-api
+ubuntu@ip-172-31-1-151:~/air-quality-api$ ls -lah
+total 96K
+drwxrwxr-x 5 ubuntu ubuntu 4.0K Sep  2 15:24 .
+drwxr-x--- 6 ubuntu ubuntu 4.0K Sep  2 05:03 ..
+drwxrwxr-x 2 ubuntu ubuntu 4.0K Sep  2 15:24 __pycache__
+-rw-rw-r-- 1 ubuntu ubuntu  17K Sep  2 15:23 api.py
+drwxrwxr-x 4 ubuntu ubuntu 4.0K Sep  2 14:44 data
+-rwxrwxr-x 1 ubuntu ubuntu  17K Sep  2 15:24 openmp_air_quality
+-rw-rw-r-- 1 ubuntu ubuntu 2.8K Sep  2 15:20 openmp_air_quality.c
+-rw-rw-r-- 1 ubuntu ubuntu 1.2K Sep  2 15:21 openmp_processor.py
+-rwxrwxr-x 1 ubuntu ubuntu  17K Sep  2 15:05 parallel_processor
+-rw-rw-r-- 1 ubuntu ubuntu  528 Sep  2 15:05 parallel_processor.c
+-rw-rw-r-- 1 ubuntu ubuntu 3.1K Sep  2 14:44 realtime_simulator.py
+drwxrwxr-x 5 ubuntu ubuntu 4.0K Sep  2 05:01 venv
+ubuntu@ip-172-31-1-151:~/air-quality-api$ 
+
+
+results
+sequential : 
+ubuntu@ip-172-31-1-151:~/air-quality-api$ ./sequential_air_quality 
+SEQUENTIAL_RESULT
+threads=1
+records=506
+average_aqi=78.38
+minimum_aqi=28.66
+maximum_aqi=94.64
+execution_time=0.000202000
+ubuntu@ip-172-31-1-151:~/air-quality-api$ 
+
+OpenMP : 
+ubuntu@ip-172-31-1-151:~/air-quality-api$ ./openmp_air_quality data/processed/air_quality_cleaned.csv
+OPENMP_RESULT
+threads=2
+records=506
+average_aqi=78.38
+minimum_aqi=28.66
+maximum_aqi=94.64
+execution_time=0.000071679
+ubuntu@ip-172-31-1-151:~/air-quality-api$
+
+cuda : 

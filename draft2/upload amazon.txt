@@ -1,0 +1,24 @@
+C:\Users\GAUTHAM SURESH\Desktop\HPC mini project\dashboard>npm run build -- --base=/dashboard/
+
+> air-quality-dashboard@1.0.0 build
+> vite build --base=/dashboard/
+
+vite v7.3.6 building client environment for production...
+node_modules/lucide-react/dist/esm/context.mjs (2:0): Module level directives cause errors when bundled, "use client" in "node_modules/lucide-react/dist/esm/context.mjs" was ignored.
+node_modules/lucide-react/dist/esm/Icon.mjs (2:0): Module level directives cause errors when bundled, "use client" in "node_modules/lucide-react/dist/esm/Icon.mjs" was ignored.
+✓ 2414 modules transformed.
+dist/index.html                  0.44 kB │ gzip:   0.31 kB
+dist/assets/index-CtuaorBh.js  656.66 kB │ gzip: 197.57 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.84s
+
+C:\Users\GAUTHAM SURESH\Desktop\HPC mini project\dashboard>aws s3 sync dist s3://air-quality-hpc/dashboard/ --delete
+delete: s3://air-quality-hpc/dashboard/assets/index-9e52D_e8.js
+upload: dist\index.html to s3://air-quality-hpc/dashboard/index.html
+upload: dist\assets\index-CtuaorBh.js to s3://air-quality-hpc/dashboard/assets/index-CtuaorBh.js
+
+C:\Users\GAUTHAM SURESH\Desktop\HPC mini project\dashboard>
